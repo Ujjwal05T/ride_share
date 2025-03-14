@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaUsers, FaStar, FaHistory, FaShieldAlt } from 'react-icons/fa';
 
 function Home() {
@@ -13,8 +14,7 @@ function Home() {
               Share Your Ride, <span className="text-blue-600">Share The Journey</span>
             </h1>
             <p className="text-lg text-gray-600 mb-8">
-              Connect with travelers heading to the same destination. Save money, reduce emissions, 
-              and make new connections along the way.
+              Comfort like private, Price like public transport
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/auth/signup" className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg text-center transition-all">
@@ -26,9 +26,11 @@ function Home() {
             </div>
           </div>
           <div className="md:w-1/2">
-            <img 
-              src="/assets/hero-image.svg" 
+          <Image 
+              src="/image.jpg" 
               alt="People sharing ride" 
+              width={500} 
+              height={500} 
               className="w-full h-auto rounded-lg shadow-lg"
             />
           </div>
@@ -39,7 +41,7 @@ function Home() {
       <div className="bg-white py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-            Why Choose Our Ride Share?
+            Why Choose RideShare?
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
