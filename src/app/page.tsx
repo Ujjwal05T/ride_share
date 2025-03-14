@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { FaCar, FaUsers, FaStar, FaHistory, FaShieldAlt } from 'react-icons/fa';
+import { FaUsers, FaStar, FaHistory, FaShieldAlt } from 'react-icons/fa';
 
 function Home() {
   return (
