@@ -8,23 +8,19 @@ import { FaStar, FaHistory, FaUser, FaEnvelope, FaPhone, FaCarSide, FaEdit, FaCo
 function ProfilePage() {
   const router = useRouter();
   const [user, setUser] = useState({
-    fullName: "John Doe",
-    username: "johndoe",
-    email: "john.doe@example.com",
-    phone: "123-456-7890",
-    rating: 3,
-    totalRides: 42,
+    fullName: "",
+    username: "",
+    email: "",
+    phone: "",
+    rating: 0,
+    totalRides: 0,
     history: [
       { date: "2025-03-12", origin: "Home", destination: "Office", fare: "1250", coRiders: 2 },
-      { date: "2025-03-08", origin: "Office", destination: "Mall", fare: "875", coRiders: 3 },
-      { date: "2025-03-01", origin: "Airport", destination: "Home", fare: "200", coRiders: 1 }
     ]
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const [expandedTrip, setExpandedTrip] = useState<number | null>(null);
-  const [ratingDropdown, setRatingDropdown] = useState<number | null>(null);
 
   
   useEffect(() => {
@@ -71,14 +67,7 @@ function ProfilePage() {
         setLoading(false);
       }
     };
-
-    // For demo purposes, simulate API call delay
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-    
-    // Comment this out when connecting to real API
-    // fetchUserData();
+    fetchUserData();
   }, [router]);
 
   if (loading) {
@@ -208,8 +197,8 @@ function ProfilePage() {
               <p className="text-gray-400 text-sm mt-1">Average Rating</p>
             </div>
             <div className="bg-[#1a1f2e]/80 p-4 rounded-xl flex flex-col items-center justify-center shadow-lg border border-blue-900/20 hover:border-green-500/50 transition-all duration-300 transform hover:scale-105">
-              <p className="text-3xl font-bold text-green-400">12</p>
-              <p className="text-gray-400 text-sm mt-1">Rides This Month</p>
+              <p className="text-3xl font-bold text-green-400">{user.totalRides}</p>
+              <p className="text-gray-400 text-sm mt-1">Rides this month</p>
             </div>
           </div>
         </div>

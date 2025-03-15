@@ -74,19 +74,7 @@ function EditProfilePage() {
       }
     };
 
-    // For demo, populate with mock data
-    setTimeout(() => {
-      setFormData({
-        fullName: "John Doe",
-        username: "johndoe",
-        email: "john.doe@example.com",
-        phone: "123-456-7890",
-      });
-      setLoading(false);
-    }, 1000);
-
-    // Use this when connecting to a real API
-    // fetchUserData();
+    fetchUserData();
   }, [router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -186,17 +174,7 @@ function EditProfilePage() {
       });
       
       setSuccess("Profile updated successfully!");
-      
-      // For demo, simulate API call
-      setTimeout(() => {
-        setSuccess("Profile updated successfully!");
-        setSaving(false);
-        
-        // Redirect back to profile page after success
-        setTimeout(() => {
-          router.push('/profile');
-        }, 1500);
-      }, 1500);
+      setSaving(false);
       
     } catch (err:unknown) {
       const error = err as AxiosError;
