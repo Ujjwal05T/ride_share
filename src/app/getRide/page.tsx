@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { FaMapMarkerAlt, FaCar, FaUser, FaClock, FaRupeeSign } from 'react-icons/fa'
+import SearchSuggestion from '../../components/SearchSuggestion';
 
 function GetRidePage() {
   const [source, setSource] = useState('')
@@ -44,6 +45,7 @@ function GetRidePage() {
         seatsAvailable: 2,
       }
   ]
+  // const availableRides:any = []
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
@@ -54,23 +56,19 @@ function GetRidePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div className="relative">
           <FaMapMarkerAlt className="absolute left-3 top-3 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Enter pickup location"
-            value={source}
-            onChange={(e) => setSource(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-800 rounded-lg focus:ring-2 focus:ring-gray-600 outline-none"
+          <SearchSuggestion 
+          placeholder="Enter pickup location"
+          value={source}
+          onChange={setSource}
           />
         </div>
         
         <div className="relative">
           <FaMapMarkerAlt className="absolute left-3 top-3 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Enter destination"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-800 rounded-lg focus:ring-2 focus:ring-gray-600 outline-none"
+          <SearchSuggestion 
+          placeholder="Enter drop location"
+          value={destination}
+          onChange={setDestination}
           />
         </div>
       </div>
@@ -86,32 +84,7 @@ function GetRidePage() {
       
       {availableRides.length > 0 ? (
     <div className="space-y-4">
-      {availableRides.map((ride) => (
-        <div key={ride.id} className="bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-800">
-          {/* ...existing ride card content... */}
-        </div>
-      ))}
-    </div>
-  ) : (
-    <div className="bg-gray-900 p-8 rounded-lg text-center">
-      <div className="text-gray-400 mb-4">
-        <FaCar className="inline-block text-4xl mb-2" />
-        <p className="text-lg">No rides available for this route</p>
-      </div>
-      <p className="text-gray-500">
-        Try changing your search criteria or check back later
-      </p>
-      <button 
-        className="mt-4 bg-gray-700 hover:bg-gray-600 px-6 py-2 rounded-lg transition-colors"
-        onClick={() => window.location.reload()}
-      >
-        Refresh Results
-      </button>
-    </div>
-  )}
-
-      <div className="space-y-4">
-        {availableRides.map((ride) => (
+      {availableRides.map((ride:any) => (
           <div key={ride.id} className="bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-800">
             <div className="flex justify-between items-start mb-4">
               <div>
@@ -145,7 +118,24 @@ function GetRidePage() {
             </div>
           </div>
         ))}
+    </div>
+  ) : (
+    <div className="bg-gray-900 p-8 rounded-lg text-center">
+      <div className="text-gray-400 mb-4">
+        <FaCar className="inline-block text-4xl mb-2" />
+        <p className="text-lg">No rides available for this route</p>
       </div>
+      <p className="text-gray-500">
+        Try changing your search criteria or check back later
+      </p>
+      <button 
+        className="mt-4 bg-gray-700 hover:bg-gray-600 px-6 py-2 rounded-lg transition-colors"
+        onClick={() => window.location.reload()}
+      >
+        Refresh Results
+      </button>
+    </div>
+  )}
     </div>
   </div>
   )
