@@ -15,13 +15,17 @@ function ProfilePage() {
     rating: 3,
     totalRides: 42,
     history: [
-      { date: "2025-03-12", origin: "Home", destination: "Office", fare: "$12.50", coRiders: 2 },
-      { date: "2025-03-08", origin: "Office", destination: "Mall", fare: "$8.75", coRiders: 3 },
-      { date: "2025-03-01", origin: "Airport", destination: "Home", fare: "$22.00", coRiders: 1 }
+      { date: "2025-03-12", origin: "Home", destination: "Office", fare: "1250", coRiders: 2 },
+      { date: "2025-03-08", origin: "Office", destination: "Mall", fare: "875", coRiders: 3 },
+      { date: "2025-03-01", origin: "Airport", destination: "Home", fare: "200", coRiders: 1 }
     ]
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [expandedTrip, setExpandedTrip] = useState<number | null>(null);
+  const [ratingDropdown, setRatingDropdown] = useState<number | null>(null);
+
   
   useEffect(() => {
     const fetchUserData = async () => {

@@ -2,7 +2,7 @@
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { FaUser, FaEnvelope, FaPhone, FaUserCircle, FaCamera, FaArrowLeft, FaSave } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaArrowLeft, FaSave } from 'react-icons/fa';
 
 function EditProfilePage() {
   const router = useRouter();
