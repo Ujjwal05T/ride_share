@@ -6,3 +6,11 @@ export interface DecodedToken {
 	exp: number;
 	iat: number;
  } 
+
+ export interface SearchSuggestionProps {
+	 placeholder?: string;
+	value: string;
+	onChange: (value: string) => void;
+ }
+ //todo: add more types here
+ //availableRides
