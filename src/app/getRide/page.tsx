@@ -84,7 +84,7 @@ function GetRidePage() {
       
       {availableRides.length > 0 ? (
     <div className="space-y-4">
-      {availableRides.map((ride:any) => (
+      {availableRides.map((ride) => (
           <div key={ride.id} className="bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-800">
             <div className="flex justify-between items-start mb-4">
               <div>
