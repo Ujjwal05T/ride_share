@@ -1,17 +1,18 @@
 'use client'
 import axios, { AxiosError } from 'axios';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaHistory, FaUser, FaEnvelope, FaPhone, FaCarSide, FaEdit, FaCog, FaMapMarkerAlt, FaCalendarAlt, FaUserFriends } from 'react-icons/fa';
 
-function Page() {
+function ProfilePage() {
   const router = useRouter();
   const [user, setUser] = useState({
     fullName: "John Doe",
     username: "johndoe",
     email: "john.doe@example.com",
     phone: "123-456-7890",
-    rating: 4.8,
+    rating: 3,
     totalRides: 42,
     history: [
       { date: "2025-03-12", origin: "Home", destination: "Office", fare: "$12.50", coRiders: 2 },
@@ -21,7 +22,6 @@ function Page() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [activeTab, setActiveTab] = useState("trips");
   
   useEffect(() => {
     const fetchUserData = async () => {
@@ -107,7 +107,7 @@ function Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0b1018] to-[#1a1f2e] text-white pb-12">
-      {/* Fixed Header */}
+      {/* Header */}
       <header className="sticky top-0 z-10 bg-[#0b1018]/80 backdrop-blur-md border-b border-gray-800 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center">
@@ -123,7 +123,10 @@ function Page() {
           </div>
           <div className="flex gap-3">
             <button className="p-2 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-gray-800">
+              <Link href={`/profile/edit`}>
               <FaEdit size={18} />
+              </Link>
+              
             </button>
             <button className="p-2 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-gray-800">
               <FaCog size={18} />
@@ -139,9 +142,6 @@ function Page() {
             <div className="flex-shrink-0 relative">
               <div className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-3xl font-bold border-4 border-[#1e2330] shadow-lg">
                 {user.fullName.charAt(0)}
-              </div>
-              <div className="absolute -bottom-2 -right-2 bg-blue-500 rounded-full p-2 border-2 border-[#1e2330] shadow-lg">
-                <FaEdit size={14} />
               </div>
             </div>
             
@@ -191,7 +191,7 @@ function Page() {
             </div>
             <h2 className="text-xl font-bold">Trip Statistics</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div className="bg-[#1a1f2e]/80 p-4 rounded-xl flex flex-col items-center justify-center shadow-lg border border-blue-900/20 hover:border-blue-500/50 transition-all duration-300 transform hover:scale-105">
               <p className="text-3xl font-bold text-blue-400">{user.totalRides}</p>
               <p className="text-gray-400 text-sm mt-1">Total Rides</p>
@@ -207,39 +207,18 @@ function Page() {
               <p className="text-3xl font-bold text-green-400">12</p>
               <p className="text-gray-400 text-sm mt-1">Rides This Month</p>
             </div>
-            <div className="bg-[#1a1f2e]/80 p-4 rounded-xl flex flex-col items-center justify-center shadow-lg border border-blue-900/20 hover:border-purple-500/50 transition-all duration-300 transform hover:scale-105">
-              <p className="text-3xl font-bold text-purple-400">320</p>
-              <p className="text-gray-400 text-sm mt-1">Total Km</p>
-            </div>
           </div>
         </div>
-
-        {/* Tabs */}
+  
+          {/* Recent Trips */}
         <div className="mb-6 flex border-b border-gray-800">
-          <button
-            className={`py-3 px-5 font-medium text-sm flex items-center ${
-              activeTab === 'trips' 
-                ? 'text-blue-400 border-b-2 border-blue-500' 
-                : 'text-gray-400 hover:text-gray-300'
-            }`}
-            onClick={() => setActiveTab('trips')}
-          >
+          
             <FaHistory className="mr-2" /> Recent Trips
-          </button>
-          <button
-            className={`py-3 px-5 font-medium text-sm flex items-center ${
-              activeTab === 'ratings' 
-                ? 'text-blue-400 border-b-2 border-blue-500' 
-                : 'text-gray-400 hover:text-gray-300'
-            }`}
-            onClick={() => setActiveTab('ratings')}
-          >
-            <FaStar className="mr-2" /> Ratings
-          </button>
+          
         </div>
 
-        {/* Tab Content */}
-        {activeTab === 'trips' && (
+        {/* Content */}
+        {  (
           <div className="space-y-4">
             {user.history.length > 0 ? (
               user.history.map((trip, index) => (
@@ -322,7 +301,7 @@ function Page() {
           </div>
         )}
 
-        {activeTab === 'ratings' && (
+        {/* {activeTab === 'ratings' && (
           <div className="bg-gradient-to-br from-[#121418] to-[#131824] rounded-xl p-6 shadow-xl border border-gray-800">
             <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
               <div className="flex flex-col items-center">
@@ -403,11 +382,11 @@ function Page() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#0b1018]/80 backdrop-blur-md border-t border-gray-800 shadow-lg py-2 px-4">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-[#0b1018]/80 backdrop-blur-md border-t border-gray-800 shadow-lg py-2 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-around">
             <button className="p-2 flex flex-col items-center text-gray-400 hover:text-blue-400">
@@ -441,4 +420,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default ProfilePage;
